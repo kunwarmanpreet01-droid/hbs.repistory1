@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Himanchal Boarding School - Pokhara, Nepal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --darker: #020617;
+            --card: #1e293b;
+            --card-hover: #334155;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(148, 163, 184, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVIGATION - GLASSMORPHISM ONLY ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            background: white;
+            padding: 2px;
+            flex-shrink: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--darker);
+            padding: 6rem 1rem 2rem;
+        }
+
+        #particleCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            touch-action: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .btn {
+            padding: 0.875rem 1.75rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: clamp(0.875rem, 1.5vw, 1rem);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border: none;
+            min-height: 48px;
+            min-width: 140px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--text-muted);
+        }
+
+        .hero-stats {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            gap: clamp(1.5rem, 4vw, 4rem);
+            margin-top: 3rem;
+            padding: 0 1rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.8s both;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .stat-item {
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .stat-number {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+            margin-top: 0.25rem;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape-1 {
+            width: min(400px, 50vw);
+            height: min(400px, 50vw);
+            background: var(--primary);
+            top: -10%;
+            left: -10%;
+        }
+
+        .shape-2 {
+            width: min(300px, 40vw);
+            height: min(300px, 40vw);
+            background: var(--accent);
+            bottom: -10%;
+            right: -10%;
+            animation-delay: -5s;
+        }
+
+        .shape-3 {
+            width: min(250px, 35vw);
+            height: min(250px, 35vw);
+            background: #8b5cf6;
+            top: 50%;
+            left: 50%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 2rem);
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: clamp(2rem, 5vw, 4rem);
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.75rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            background: var(--dark);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(2rem, 5vw, 4rem);
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 24px;
+            display: block;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 26px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .about-content h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .about-content p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+            font-size: clamp(0.95rem, 1.8vw, 1rem);
+        }
+
+        .feature-list {
+            list-style: none;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-muted);
+            font-size: clamp(0.9rem, 1.6vw, 0.95rem);
+            line-height: 1.5;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            width: 24px;
+            height: 24px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* ===== GALLERY ===== */
+        .gallery {
+            background: var(--darker);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: clamp(0.75rem, 2vw, 1.5rem);
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* ===== PROGRAMS ===== */
+        .programs {
+            background: var(--dark);
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+            gap: clamp(1rem, 3vw, 2rem);
+        }
+
+        .program-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .program-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .program-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .program-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(6, 182, 212, 0.1));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+            border: 1px solid var(--border);
+        }
+
+        .program-card h3 {
+            font-size: clamp(1.1rem, 2vw, 1.25rem);
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .program-card p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: clamp(0.875rem, 1.5vw, 0.95rem);
+        }
+
+        /* ===== FACILITIES ===== */
+        .facilities {
+            background: var(--darker);
+        }
+
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+            gap: clamp(1rem, 3vw, 1.5rem);
+        }
+
+        .facility-item {
+            background: var(--card);
+            border-radius: 16px;
+            padding: clamp(1.5rem, 3vw, 2rem);
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .facility-item:hover {
+            background: var(--card-hover);
+            transform: translateY(-4px);
+        }
+
+        .facility-icon {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 0.75rem;
+        }
+
+        .facility-item h4 {
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .facility-item p {
+            color: var(--text-muted);
+            font-size: clamp(0.8rem, 1.5vw, 0.875rem);
+            line-height: 1.5;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            background: var(--dark);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+            gap: clamp(1rem, 3vw, 2rem);
+        }
+
+        .testimonial-card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 0.5rem;
+            right: 1.5rem;
+            font-size: clamp(3rem, 6vw, 4rem);
+            color: var(--primary);
+            opacity: 0.2;
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+        }
+
+        .testimonial-text {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            font-size: clamp(0.9rem, 1.8vw, 1rem);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        .author-info h5 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-size: clamp(0.9rem, 1.8vw, 1rem);
+        }
+
+        .author-info span {
+            color: var(--text-muted);
+            font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+        }
+
+        /* ===== CTA ===== */
+        .cta {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            position: relative;
+            overflow: hidden;
+            padding: clamp(4rem, 10vw, 6rem) clamp(1rem, 4vw, 2rem);
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.75rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .cta p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary-dark);
+            border: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--darker);
+            border-top: 1px solid var(--border);
+            padding: clamp(3rem, 8vw, 4rem) clamp(1rem, 4vw, 2rem) 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: clamp(2rem, 5vw, 4rem);
+            max-width: 1200px;
+            margin: 0 auto clamp(2rem, 5vw, 4rem);
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            margin-top: 1rem;
+            line-height: 1.7;
+            font-size: clamp(0.875rem, 1.5vw, 0.95rem);
+        }
+
+        .footer-links h4 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            font-size: clamp(1rem, 2vw, 1.1rem);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: clamp(0.875rem, 1.5vw, 0.95rem);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            font-size: 0.875rem;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(80%, 320px);
+            height: 100vh;
+            height: 100dvh;
+            background: var(--dark);
+            z-index: 1001;
+            padding: 2rem;
+            transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 1px solid var(--border);
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+        }
+
+        .mobile-menu-links li {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .mobile-menu-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: clamp(1.1rem, 3vw, 1.25rem);
+            font-weight: 600;
+            display: block;
+            padding: 0.25rem 0;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1023px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 767px) {
+            .nav-container { padding: 0.75rem 1rem; }
+            .logo { font-size: clamp(1rem, 4vw, 1.4rem); }
+            .logo img { width: 40px; height: 40px; }
+            .hero { padding: 5rem 1rem 2rem; min-height: auto; padding-bottom: 3rem; }
+            .hero-stats { gap: 1.5rem; margin-top: 2rem; }
+            .stat-item { min-width: 80px; }
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .about-image { order: -1; }
+            .about-image img { max-height: 350px; }
+            .programs-grid { grid-template-columns: 1fr; }
+            .facilities-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; text-align: center; gap: 1rem; }
+            .btn { width: 100%; max-width: 280px; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+        }
+
+        @media (max-width: 479px) {
+            .hero h1 { font-size: 1.75rem; }
+            .hero p { font-size: 0.95rem; }
+            .hero-badge { font-size: 0.8rem; padding: 0.4rem 0.8rem; }
+            .stat-number { font-size: 1.5rem; }
+            .stat-label { font-size: 0.7rem; }
+            .facilities-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .program-card { padding: 1.5rem; }
+            .testimonial-card { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.5rem; }
+            .about-content h3 { font-size: 1.35rem; }
+        }
+
+        @media (min-width: 1400px) {
+            .container, .nav-container, .footer-grid, .footer-bottom { max-width: 1320px; }
+        }
+
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero { min-height: auto; padding-top: 5rem; padding-bottom: 2rem; }
+            .hero-stats { margin-top: 1.5rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+            .scroll-reveal { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="https://kimi-web-img.moonshot.cn/img/media.edusanjal.com/8dd4df8f8d57b3dec41fcf36a91d1901445aa0dd.png" alt="HBS Logo">
+                <span>Himanchal Boarding School</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#facilities">Facilities</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
+        <ul class="mobile-menu-links">
+            <li><a href="#home" onclick="toggleMobileMenu()">Home</a></li>
+            <li><a href="#about" onclick="toggleMobileMenu()">About</a></li>
+            <li><a href="#gallery" onclick="toggleMobileMenu()">Gallery</a></li>
+            <li><a href="#programs" onclick="toggleMobileMenu()">Programs</a></li>
+            <li><a href="#facilities" onclick="toggleMobileMenu()">Facilities</a></li>
+            <li><a href="#testimonials" onclick="toggleMobileMenu()">Testimonials</a></li>
+            <li><a href="#contact" onclick="toggleMobileMenu()">Contact</a></li>
+        </ul>
+    </div>
+
+    <section class="hero" id="home">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <canvas id="particleCanvas"></canvas>
+        <div class="hero-content">
+            <div class="hero-badge">Established 2043 B.S. • Airport-7, Pokhara, Nepal</div>
+            <h1>Shaping Future <span>Leaders</span> Through Excellence</h1>
+            <p>Himanchal Boarding School provides world-class education with state-of-the-art facilities, dedicated faculty, and a nurturing environment for holistic development.</p>
+            <div class="hero-buttons">
+                <a href="#programs" class="btn btn-primary">Explore Programs →</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-number">38+</div>
+                <div class="stat-label">Years of Excellence</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2000+</div>
+                <div class="stat-label">Students Enrolled</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">150+</div>
+                <div class="stat-label">Expert Faculty</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Success Rate</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid scroll-reveal">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&h=600&fit=crop" alt="School Campus" loading="lazy">
+                </div>
+                <div class="about-content">
+                    <h3>Building a <span class="gradient-text">Brighter Tomorrow</span></h3>
+                    <p>Founded in 2043 B.S. (1986 A.D.), Himanchal Boarding School is a 21st century value-based progressive school located at Airport-7, Pokhara, Nepal. We believe in nurturing not just academic brilliance but also character, creativity, and compassion.</p>
+                    <p>Our commitment to quality education combines rigorous academics with enriching extracurricular programs. We believe in learning by doing, with emphasis on the practical aspect of education.</p>
+                    <ul class="feature-list">
+                        <li>Co-educational English Medium Institution</li>
+                        <li>State-of-the-art Science & Computer Labs</li>
+                        <li>Comprehensive Sports & Cultural Programs</li>
+                        <li>Digital Learning Environment with Smart Classrooms</li>
+                        <li>Safe Transport & CCTV Surveillance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <h2>School <span class="gradient-text">Gallery</span></h2>
+                <p>Glimpses of life at Himanchal Boarding School</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item scroll-reveal">
+                    <img src="https://kimi-web-img.moonshot.cn/img/hbs.edu.np/ce54c4571eb50b1fd7978edfb24f6117da1a3035.jpg" alt="Students at HBS" loading="lazy">
+                    <div class="gallery-overlay"><h4>Student Life</h4></div>
+                </div>
+                <div class="gallery-item scroll-reveal">
+                    <img src="https://kimi-web-img.moonshot.cn/img/hbs.edu.np/e38e2da25dd8feb57933faa879dfe9e7a4cd676a.jpg" alt="Prize Distribution" loading="lazy">
+                    <div class="gallery-overlay"><h4>Prize Distribution</h4></div>
+                </div>
+                <div class="gallery-item scroll-reveal">
+                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&h=450&fit=crop" alt="Classroom" loading="lazy">
+                    <div class="gallery-overlay"><h4>Modern Classrooms</h4></div>
+                </div>
+                <div class="gallery-item scroll-reveal">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&h=450&fit=crop" alt="Sports" loading="lazy">
+                    <div class="gallery-overlay"><h4>Sports Activities</h4></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="programs" id="programs">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <h2>Our <span class="gradient-text">Academic Programs</span></h2>
+                <p>Comprehensive curriculum designed to foster intellectual growth and practical skills</p>
+            </div>
+            <div class="programs-grid">
+                <div class="program-card scroll-reveal">
+                    <div class="program-icon">🎓</div>
+                    <h3>Primary Education</h3>
+                    <p>Foundation years focused on building strong academic basics, creativity, and social skills through interactive learning methods.</p>
+                </div>
+                <div class="program-card scroll-reveal">
+                    <div class="program-icon">📚</div>
+                    <h3>Secondary Education</h3>
+                    <p>Comprehensive secondary program preparing students for SEE with specialized subject streams and career guidance.</p>
+                </div>
+                <div class="program-card scroll-reveal">
+                    <div class="program-icon">🔬</div>
+                    <h3>Science & Technology</h3>
+                    <p>Advanced science labs, coding classes, and robotics programs to prepare students for the digital future.</p>
+                </div>
+                <div class="program-card scroll-reveal">
+                    <div class="program-icon">🎨</div>
+                    <h3>Arts & Humanities</h3>
+                    <p>Creative expression through music, dance, drama, and visual arts with dedicated studios and expert instructors.</p>
+                </div>
+                <div class="program-card scroll-reveal">
+                    <div class="program-icon">⚽</div>
+                    <h3>Sports & Athletics</h3>
+                    <p>Professional coaching in football, basketball, cricket, and swimming with modern sports facilities.</p>
+                </div>
+                <div class="program-card scroll-reveal">
+                    <div class="program-icon">🌍</div>
+                    <h3>Leadership & Service</h3>
+                    <p>Community service programs, student councils, and leadership workshops to build responsible citizens.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="facilities" id="facilities">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <h2>World-Class <span class="gradient-text">Facilities</span></h2>
+                <p>Modern infrastructure designed to support comprehensive learning and development</p>
+            </div>
+            <div class="facilities-grid">
+                <div class="facility-item scroll-reveal">
+                    <div class="facility-icon">📖</div>
+                    <h4>Library</h4>
+                    <p>Extensive collection of books, digital resources, and quiet study spaces</p>
+                </div>
+                <div class="facility-item scroll-reveal">
+                    <div class="facility-icon">🏃</div>
+                    <h4>Sports Complex</h4>
+                    <p>Indoor and outdoor sports facilities for all major games</p>
+                </div>
+                <div class="facility-item scroll-reveal">
+                    <div class="facility-icon">🚌</div>
+                    <h4>Transport</h4>
+                    <p>Safe and comfortable bus service covering all major routes</p>
+                </div>
+                <div class="facility-item scroll-reveal">
+                    <div class="facility-icon">🎵</div>
+                    <h4>Music & Dance</h4>
+                    <p>Dedicated studios for performing arts and cultural activities</p>
+                </div>
+                <div class="facility-item scroll-reveal">
+                    <div class="facility-icon">🔬</div>
+                    <h4>Science Labs</h4>
+                    <p>Modern laboratories for physics, chemistry, and biology</p>
+                </div>
+                <div class="facility-item scroll-reveal">
+                    <div class="facility-icon">💻</div>
+                    <h4>Computer Lab</h4>
+                    <p>High-tech computer lab with multimedia and internet facilities</p>
+                </div>
+                <div class="facility-item scroll-reveal">
+                    <div class="facility-icon">🏥</div>
+                    <h4>Health Center</h4>
+                    <p>On-campus medical facility with qualified healthcare staff</p>
+                </div>
+                <div class="facility-item scroll-reveal">
+                    <div class="facility-icon">🍽️</div>
+                    <h4>Cafeteria</h4>
+                    <p>Nutritious and hygienic meals prepared in modern kitchen</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <h2>What Parents <span class="gradient-text">Say</span></h2>
+                <p>Testimonials from our valued school community</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card scroll-reveal">
+                    <p class="testimonial-text">Himanchal Boarding School has transformed my child's approach to learning. The teachers are incredibly dedicated and the facilities are world-class. I couldn't have asked for a better environment for my daughter.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SR</div>
+                        <div class="author-info">
+                            <h5>Sita Rana</h5>
+                            <span>Parent of Grade 8 Student</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card scroll-reveal">
+                    <p class="testimonial-text">The balance between academics and extracurricular activities at HBS is remarkable. My son has developed confidence, leadership skills, and a genuine love for learning. Truly an outstanding institution.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">BP</div>
+                        <div class="author-info">
+                            <h5>Bikash Poudel</h5>
+                            <span>Parent of Grade 10 Student</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card scroll-reveal">
+                    <p class="testimonial-text">As an alumnus, I can confidently say that HBS prepared me exceptionally well for university and beyond. The values and skills I learned here continue to guide me in my professional career.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AK</div>
+                        <div class="author-info">
+                            <h5>Anjali Karki</h5>
+                            <span>Alumni, Class of 2018</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="contact">
+        <div class="cta-content">
+            <h2>Begin Your Child's Journey to Excellence</h2>
+            <p>Join Himanchal Boarding School and give your child the gift of quality education, character building, and lifelong learning.</p>
+            <a href="mailto:info@hbs.edu.np" class="btn btn-white">Enquire Now →</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <img src="https://kimi-web-img.moonshot.cn/img/media.edusanjal.com/8dd4df8f8d57b3dec41fcf36a91d1901445aa0dd.png" alt="HBS Logo">
+                    <span>Himanchal Boarding School</span>
+                </a>
+                <p>Nurturing young minds since 1995. Committed to excellence in education and holistic development of every student.</p>
+                <div class="social-links" style="margin-top: 1.5rem;">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Twitter">t</a>
+                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="#" aria-label="Instagram">ig</a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#programs">Programs</a></li>
+                    <li><a href="#facilities">Facilities</a></li>
+                    <li><a href="#">Admissions</a></li>
+                    <li><a href="#">Calendar</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Student Portal</a></li>
+                    <li><a href="#">Parent Login</a></li>
+                    <li><a href="#">Library</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="#">Airport-7, Pokhara, Nepal</a></li>
+                    <li><a href="mailto:info@hbs.edu.np">info@hbs.edu.np</a></li>
+                    <li><a href="tel:061-462932">061-462932</a></li>
+                    <li><a href="tel:9856025477">9856025477</a></li>
+                    <li><a href="tel:9856020864">9856020864</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Himanchal Boarding School. All rights reserved.</p>
+            <p>Designed with excellence in mind</p>
+        </div>
+    </footer>
+
+    <script>
+        // Particle System
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 150 };
+        let isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+
+        function resizeCanvas() {
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            canvas.style.width = window.innerWidth + 'px';
+            canvas.style.height = window.innerHeight + 'px';
+            ctx.scale(dpr, dpr);
+        }
+        resizeCanvas();
+        window.addEventListener('resize', () => { resizeCanvas(); init(); });
+
+        window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+        window.addEventListener('touchstart', (e) => { if (e.touches.length > 0) { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; } }, { passive: true });
+        window.addEventListener('touchmove', (e) => { if (e.touches.length > 0) { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; } }, { passive: true });
+        window.addEventListener('touchend', () => { mouse.x = null; mouse.y = null; });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * window.innerWidth;
+                this.y = Math.random() * window.innerHeight;
+                this.size = Math.random() * (isTouchDevice ? 2 : 3) + 1;
+                this.baseX = this.x;
+                this.baseY = this.y;
+                this.density = (Math.random() * 30) + 1;
+                this.color = this.getRandomColor();
+                this.velocity = { x: (Math.random() - 0.5) * 0.5, y: (Math.random() - 0.5) * 0.5 };
+            }
+            getRandomColor() {
+                const colors = ['rgba(99, 102, 241, 0.6)', 'rgba(6, 182, 212, 0.6)', 'rgba(139, 92, 246, 0.6)', 'rgba(255, 255, 255, 0.3)'];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+            update() {
+                if (this.x < 0 || this.x > window.innerWidth) this.velocity.x *= -1;
+                if (this.y < 0 || this.y > window.innerHeight) this.velocity.y *= -1;
+                if (mouse.x != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouse.radius - distance) / mouse.radius;
+                        const directionX = forceDirectionX * force * this.density * 0.6;
+                        const directionY = forceDirectionY * force * this.density * 0.6;
+                        this.x -= directionX;
+                        this.y -= directionY;
+                    } else {
+                        this.returnToBase();
+                    }
+                } else {
+                    this.returnToBase();
+                }
+            }
+            returnToBase() {
+                if (this.x !== this.baseX) { let dx = this.x - this.baseX; this.x -= dx / 20; }
+                if (this.y !== this.baseY) { let dy = this.y - this.baseY; this.y -= dy / 20; }
+                this.x += this.velocity.x * 0.3;
+                this.y += this.velocity.y * 0.3;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particles = [];
+            const area = window.innerWidth * window.innerHeight;
+            const density = isTouchDevice ? 15000 : 9000;
+            const numberOfParticles = Math.min(Math.floor(area / density), isTouchDevice ? 60 : 100);
+            for (let i = 0; i < numberOfParticles; i++) particles.push(new Particle());
+        }
+
+        function connect() {
+            const maxDistance = isTouchDevice ? 100 : 120;
+            const maxConnections = isTouchDevice ? 2 : 3;
+            for (let a = 0; a < particles.length; a++) {
+                let connections = 0;
+                for (let b = a + 1; b < particles.length; b++) {
+                    if (connections >= maxConnections) break;
+                    let dx = particles[a].x - particles[b].x;
+                    let dy = particles[a].y - particles[b].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < maxDistance) {
+                        let opacity = 1 - (distance / maxDistance);
+                        ctx.strokeStyle = 'rgba(99, 102, 241,' + opacity * 0.15 + ')';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                        connections++;
+                    }
+                }
+            }
+        }
+
+        let animationId;
+        function animate() {
+            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+            for (let i = 0; i < particles.length; i++) { particles[i].update(); particles[i].draw(); }
+            connect();
+            animationId = requestAnimationFrame(animate);
+        }
+        init();
+        animate();
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) cancelAnimationFrame(animationId);
+            else animate();
+        });
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+            document.querySelector('.mobile-menu-overlay').classList.toggle('active');
+            document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('active') ? 'hidden' : '';
+        }
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+        // Navbar Scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.background = 'rgba(15, 23, 42, 0.6)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+            });
+        });
+
+        // Performance
+        if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) {
+            if (particles.length > 50) particles = particles.slice(0, 50);
+        }
+    </script>
+</body>
+</html>
